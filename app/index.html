@@ -1,0 +1,47 @@
+<html ng-app="foot">
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/foot.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+
+    <script src="js/foot.js"></script>
+    <script src="js/directives/drop-area.directive.js"></script>
+    <script src="js/directives/player-draggable.directive.js"></script>
+    <script src="js/controllers/foot.controller.js"></script>
+</head>
+<body ng-controller="FootCtrl">
+
+<div class="container">
+    <h1>Cedric</h1>
+
+    <div class="row">
+        <div class="col-md-5">
+            <h2>Joueur</h2>
+
+            <p ng-repeat="player in joueurs">
+                <player-draggable position="{ player : player}" myclass="label label-default"></player-draggable>
+            </p>
+        </div>
+        <div class="col-md-7">
+            <h2>Terrain</h2>
+
+            <div class="row" ng-repeat="ligne in terrain">
+                <div class="col-xs-1 touche">{{ligne.type}}</div>
+                <div class="col-xs-2 position" ng-repeat="player in ligne.players">
+                    <drop-area position="player" ng-if="!player.disabled"></drop-area>
+                </div>
+            </div>
+
+            <br>
+            <div class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-info" ng-click="saveTerrain()">Save</button>
+                <button type="button" class="btn btn-danger" ng-click="clearTerrain()">Delete</button>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
